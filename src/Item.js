@@ -4,7 +4,7 @@ const beautyColors = [
   "#FFB5E8", "#FF9CEE", "#FFCCF9", "#FCC2FF", "#F6A6FF",
   "#B28DFF", "#C5A3FF", "#D5AAFF", "#ECD4FF", "#FBE4FF",
   "#DCD3FF", "#A79AFF", "#B5B9FF", "#97A2FF", "#AFCBFF",
-  "#AFF8DB", "#C4FAF8", "#85E3FF", "#ACEZFF", "#6EB5FF",
+  "#AFF8DB", "#C4FAF8", "#85E3FF", "#ACE2FF", "#6EB5FF",
   "#BFFCC6", "#DBFFD6", "#F3FFE3", "#E7FFAC", "#FFFFD1",
   "#FFC9DE", "#FFABAB", "#FFBEBC", "#FFCBC1", "#FFF5BA",
 ]
@@ -19,6 +19,9 @@ const StItem = styled.div`
   color: black;
   font-weight: bolder;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   &:before {
     content: " ";
     position: absolute;
@@ -36,8 +39,32 @@ const StItem = styled.div`
   }
 `
 
+const StItemW = styled(StItem)`
+  ${props => props.width && `width: ${props.width}px;`}
+  ${props => props.minwidth && `min-width: ${props.width}px;`}
+  ${props => props.maxwidth && `max-width: ${props.width}px;`}
+`
+
 export const Item = (props) => {
-  return <StItem bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
+  return <StItem {...props} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
     {props.children}
   </StItem>
+}
+
+export const MinItem = (props) => {
+  return <StItemW {...props} minwidth={150} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
+    {props.children}
+  </StItemW>
+}
+
+export const MaxItem = (props) => {
+  return <StItemW {...props} maxwidth={150} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
+    {props.children}
+  </StItemW>
+}
+
+export const FixItem = (props) => {
+  return <StItemW {...props} width={150} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
+    {props.children}
+  </StItemW>
 }

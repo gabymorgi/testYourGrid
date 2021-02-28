@@ -1,51 +1,50 @@
-import * as res from '~/uikit/Resolutions'
 import React from 'react'
 import styled from 'styled-components'
 import { Spin } from 'antd'
 
+const res = {
+  MIN_SM_SIZE: 576,
+  MIN_MD_SIZE: 768,
+  MIN_LG_SIZE: 992,
+  MIN_XL_SIZE: 1200,
+  MIN_XXL_SIZE: 1600,
+}
+
+const Cell = styled.div`
+  display: grid;
+  ${props => props.span && `grid-column: auto/ span ${props.span};`}
+  ${props => props.vspan && `grid-row: auto/ span ${props.vspan};`}
+`
+
 const StyledGrid = styled.div`
   display: grid;
-  ${(props) =>
-    props.minWidth
-      ? `grid-template-columns: repeat(auto-fill, minmax(${props.minWidth}px, 1fr));`
-      : `
-    grid-template-columns: ${props.span || props.xs || 1}fr;
-    ${
-      props.sm && props.sm > 0
-        ? `@media (min-width: ${res.MIN_SM_SIZE}px) {
-        grid-template-columns: repeat(${props.sm}, 1fr);
-      }`
-        : ''
-    }
-    ${
-      props.md && props.md > 0
-        ? `@media (min-width: ${res.MIN_MD_SIZE}px) {
-        grid-template-columns: repeat(${props.md}, 1fr);
-      }`
-        : ''
-    }
-    ${
-      props.lg && props.lg > 0
-        ? `@media (min-width: ${res.MIN_LG_SIZE}px) {
-        grid-template-columns: repeat(${props.lg}, 1fr);
-      }`
-        : ''
-    }
-    ${
-      props.xl && props.xl > 0
-        ? `@media (min-width: ${res.MIN_XL_SIZE}px) {
-        grid-template-columns: repeat(${props.xl}, 1fr);
-      }`
-        : ''
-    }
-    ${
-      props.xxl && props.xxl > 0
-        ? `@media (min-width: ${res.MIN_XXL_SIZE}px) {
-        grid-template-columns: repeat(${props.xxl}, 1fr);
-      }`
-        : ''
-    }
-  `}
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  ${props => (props.columns || props.xs) && `grid-template-columns: repeat(${props.columns || props.xs || 1}, 1fr);`}
+  ${props => props.sm &&
+    `@media (min-width: ${res.MIN_SM_SIZE}px) {
+      grid-template-columns: repeat(${props.sm}, 1fr);
+    }`
+  }
+  ${props => props.md && 
+    `@media (min-width: ${res.MIN_MD_SIZE}px) {
+      grid-template-columns: repeat(${props.md}, 1fr);
+    }`
+  }
+  ${props => props.lg &&
+    `@media (min-width: ${res.MIN_LG_SIZE}px) {
+      grid-template-columns: repeat(${props.lg}, 1fr);
+    }`
+  }
+  ${props => props.xl &&
+    `@media (min-width: ${res.MIN_XL_SIZE}px) {
+      grid-template-columns: repeat(${props.xl}, 1fr);
+    }`
+  }
+  ${props => props.xxl &&
+    `@media (min-width: ${res.MIN_XXL_SIZE}px) {
+      grid-template-columns: repeat(${props.xxl}, 1fr);
+    }`
+  }
   ${(props) =>
     props.gutter
       ? Array.isArray(props.gutter)
@@ -66,8 +65,8 @@ const StyledGrid = styled.div`
  * ║ md={4}         ║ md={6}          ║
  * ║ lg={6}         ║ lg={4}          ║
  * ║ xl={24}        ║ xl={1}          ║
- * ║ span={8}       ║ span={3}        ║
- * ║ span={5}       ║ -Not available- ║
+ * ║ columns={8}    ║ span={3}        ║
+ * ║ columns={5}    ║ -Not available- ║
  * ╚════════════════╩═════════════════╝
  */
 const Grid = (props) => {
@@ -81,5 +80,17 @@ const Grid = (props) => {
 
   return <StyledGrid {...props}>{props.children}</StyledGrid>
 }
+
+Grid.Cell = Cell
+
+export const FlexSection = styled.div`
+  display: flex;
+  flex-direction: ${props => props.direction || 'row'};
+  > *:not(:last-child) {
+    ${props => props.direction === 'column'
+      ? `margin-bottom: ${props.gutter}px;`
+      : `margin-right: ${props.gutter}px;`}
+  } 
+`
 
 export default Grid

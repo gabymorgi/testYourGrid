@@ -22,26 +22,33 @@ const StyledCode = styled.div`
   border: 1px solid #888;
   font-weight: bold;
   font-size: 14px;
+  overflow: auto;
+
+  > * {
+    white-space: nowrap;
+  }
 `
 
-const Empty = styled.div`
-  width: ${props => props.width};
-`
+const Empty = (props) => <>{Array(props.width).fill(false).map((_, i) => <span key={i}>&nbsp;</span>)}</>
 
-const TagSymbol = styled.div`
+const TagSymbol = styled.span`
   color: #79c0ff;
 `
 
-const Tag = styled.div`
+const Tag = styled.span`
   color: #7ee787;
 `
 
-const Text = styled.div`
+const Text = styled.span`
   color: #c9d1d9;
 `
 
-const TextString = styled.div`
+const TextString = styled.span`
   color: #d5a6a6;
+`
+
+const ParamString = styled.span`
+  color: yellow;
 `
 
 const VerticalEmpty = styled.div`
@@ -49,8 +56,8 @@ const VerticalEmpty = styled.div`
   width: 100%;
 `
 
-const Code = (props) => {
-  return <StyledCode>
+const HtmlCode = (props) => {
+  return <div>
     {props.code.split('\n').map((line) => {
       console.log(line)
       const nodes = []
@@ -60,7 +67,7 @@ const Code = (props) => {
           let [p1, p2] = split2s(line, '<')
           //convierto espacio en padding
           if (p1.length) {
-            nodes.push(<Empty width={`${p1.length - p1.trim().length}em`}/>)
+            nodes.push(<Empty width={p1.length - p1.trim().length}/>)
             nodes.push(<Text>{p1.trim()}</Text>)
           }
           if (p2) {
@@ -75,7 +82,7 @@ const Code = (props) => {
             if (q2) {
               //mientras hay =
               while (hasChar(q2, '=')) {
-                nodes.push(<Empty width="1ex" />)
+                nodes.push(<Empty width={1} />)
                 //separo por =
                 ;[q1, q2] = split2s(q2, '=')
                 //escribo nombre prop y escribo =
@@ -89,7 +96,7 @@ const Code = (props) => {
                 }
               }
               if (q2.length > 0) {
-                nodes.push(<Empty width="1ex" />)
+                nodes.push(<Empty width={1} />)
                 nodes.push(<TagSymbol>{q2}</TagSymbol>)
               }
             }
@@ -101,11 +108,58 @@ const Code = (props) => {
       else {
         nodes.push(<VerticalEmpty />)
       }
-      return <div style={{ display: 'flex' }}>
+      return <div>
         {nodes}
       </div>
+    })}
+  </div>
+}
+
+const CssCode = (props) => {
+  return <div>
+    {props.code.split('\n').map((line) => {
+      console.log(line)
+      const nodes = []
+      if (line.length > 0) {
+        nodes.push(<Empty width={line.length - line.trim().length}/>)
+        line = line.trim()
+        if (hasChar(line, ':')) {
+          let [p1, p2] = split2s(line, ':')
+          nodes.push(<TagSymbol>{p1}:</TagSymbol>)
+          while (hasChar(p2, '{')) {
+            ;[p1, p2] = split2s(p2, '{')
+            nodes.push(<TextString>{p1}</TextString>)
+            ;[p1, p2] = split2s(p2, '}')
+            nodes.push(<ParamString>{`{${p1}}`}</ParamString>)
+          }
+          nodes.push(<TextString>{p2}</TextString>)
+        }
+        else if (hasChar(line, '{') || hasChar(line, '}')) {
+          nodes.push(<Text>{line}</Text>)
+        }
+        else {
+          nodes.push(<TextString>{line}</TextString>)
+        }
+      }
+      else {
+        nodes.push(<VerticalEmpty />)
+      }
+      return <div>
+        {nodes}
+      </div>
+    })}
+  </div>
+}
+
+const CodePrinter = (props) => {
+  return <StyledCode>
+    {props.codeFragments.map((fragment) => {
+      switch (fragment.type) {
+        case 'css': return <CssCode code={fragment.code}/>
+        case 'html': return <HtmlCode code={fragment.code}/>
+      }
     })}
   </StyledCode>
 }
 
-export default Code
+export default CodePrinter
