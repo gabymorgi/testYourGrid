@@ -1,8 +1,7 @@
 .ant-row {
-  background-color: #ffff0080;
+  background-color: #ffff00;
 }
 
 .ant-col {
-  background-clip: content-box; /* support: IE9+ */
-  background-color: #00ff0080;
+  background-color: #00ff00;
 }

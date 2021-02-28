@@ -2,55 +2,49 @@ import './App.css';
 import 'antd/dist/antd.css';
 import styled from 'styled-components'
 import { Col, Row } from 'antd';
+import { Item } from './Item'
+import Code from './Code';
 
 const Section = styled.div`
   min-height: 100vh;
-  min-width: 100vh;
+  padding: 20px;
   background-color: black;
   color: white;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-gap: 20;
+  grid-template: auto auto / 1fr 1fr;
+  grid-template-areas: 
+    "header header"
+    "grid ant";
 `
 
-const Item = styled.div`
-  position: relative;
-  border: 1px solid black;
-  border-radius: 8px;
-  background-color: red;
-  padding: 10px; 
-  &:before {
-    content: " ";
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 10px solid;
-    border-radius: 8px;
-    border-top-color:  #ffffff80;
-    border-left-color:  #ffffff80;
-    border-bottom-color:  #00000040;
-    border-right-color:  #00000040;
-  }
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 function App() {
   return (
-    <Section>
-      <div>
-        grid
-      </div>
-      <div>
-        <div>ant</div>
-        <Row gutter={[16, 16]}>
-          <Col span={12}><Item>item</Item></Col>
-          <Col span={12}><Item>item</Item></Col>
-          <Col span={12}><Item>item</Item></Col>
-          <Col span={12}><Item>item</Item></Col>
-        </Row>
-      </div>
-    </Section>
+    <FlexColumn>
+      <Section>
+        <div>
+          grid
+        <Code code={`<div gutter="2" gutter={[16, 16]}>
+
+  hola
+</div>`}/>
+        </div>
+        <div>
+          <div>ant</div>
+          <Row gutter={[16, 16]}>
+            <Col span={12}><Item>item</Item></Col>
+            <Col span={12}><Item>item</Item></Col>
+            <Col span={12}><Item>item</Item></Col>
+            <Col span={12}><Item>item</Item></Col>
+          </Row>
+        </div>
+      </Section>
+    </FlexColumn>
   );
 }
 

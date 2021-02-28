@@ -3,19 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Spin } from 'antd'
 
-/**
- * export const MAX_XS_SIZE = 575
-export const MIN_SM_SIZE = 576
-export const MAX_SM_SIZE = 767
-export const MIN_MD_SIZE = 768
-export const MAX_MD_SIZE = 991
-export const MIN_LG_SIZE = 992
-export const MAX_LG_SIZE = 1199
-export const MIN_XL_SIZE = 1200
-export const MAX_XL_SIZE = 1599
-export const MIN_XXL_SIZE = 1600
- */
-
 const StyledGrid = styled.div`
   display: grid;
   ${(props) =>
