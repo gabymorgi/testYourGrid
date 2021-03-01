@@ -24,7 +24,7 @@ function App() {
         <img style={{margin: 'auto'}} src={process.env.PUBLIC_URL + '/test.gif'}/>
         <Basic />
         <Spandability />
-        <Responsive />
+        {/*<Responsive />*/}
         {/**
          * responsive
          *    both: could support different layouts
