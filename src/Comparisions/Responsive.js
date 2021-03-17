@@ -70,6 +70,13 @@ const grid= {
       <MinMaxItem>Item 200px - 300px</MinMaxItem>
       <MinMaxItem>Item 200px - 300px</MinMaxItem>
     </Grid>
+    <Grid minWidth={300} justify="center">
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+    </Grid>
   </FlexSection>,
   fragment: [{
     type: 'css',
@@ -103,27 +110,20 @@ const Responsive = () => {
     <Title>Responsive Usage</Title>
     <Grid columns={2} gutter={24}>
       <div>
-        <Info con>Needs extra component</Info>
-        <Info pro>It works with vertical span*</Info>
-        <Info con>Needs some tricks in some cases:</Info>
-        <Info con style={{ paddingLeft: '2em' }}>
-          On firefox overflow doesn't work properly, it need an&nbsp;
-          <span style={{ fontFamily: 'monospace' }}>overflow:auto</span>&nbsp;
-          or&nbsp;
-          <span style={{ fontFamily: 'monospace' }}>display:grid</span>&nbsp;
-          on the cell component
+        <Info pro>can receive mediaquery props</Info>
+        <Info pro>can fit as items as possible</Info>
+        <Info waring style={{ paddingLeft: '2em' }}>
+          needs to know children width, is not desirable
         </Info>
-        <Info warning style={{ paddingLeft: '2em' }}>
-          *to fill vertical available space with v span cell needs to&nbsp;
-          <span style={{ fontFamily: 'monospace' }}>display:grid</span>
+        <Info waring style={{ paddingLeft: '2em' }}>
+          only admit minWidth or maxWidth
         </Info>
       </div>
       <div>
-        <Info pro>It works as always</Info>
+        <Info pro>can receive mediaquery props</Info>
+        <Info warning>can fit as items as possible</Info>
+        <Info con style={{ paddingLeft: '2em' }}>dont work properly when the grid isn't full</Info>
       </div>
-      <Grid.Cell span={2}>
-        <Info waring style={{ textAlign: 'center' }}>in my experience, on 90% of the cases using this functionality is a sympthom of a poor layout design</Info>
-      </Grid.Cell>
       <Code codeFragments={grid.fragment} />
       <Code codeFragments={ant.fragment} />
       <Result>

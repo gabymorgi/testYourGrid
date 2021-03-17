@@ -20,6 +20,7 @@ const StyledGrid = styled.div`
   display: grid;
   ${(props) => props.width && `grid-template-columns: repeat(auto-fill, ${props.width}px);`}
   ${(props) => props.minWidth && `grid-template-columns: repeat(auto-fill, minmax(${props.minWidth}px, 1fr));`}
+  ${(props) => props.maxWidth && `grid-template-columns: repeat(auto-fill, minmax(1fr, ${props.maxWidth}px));`}
   ${props => (props.columns || props.xs) && `grid-template-columns: repeat(${props.columns || props.xs || 1}, 1fr);`}
   ${props => props.sm &&
     `@media (min-width: ${res.MIN_SM_SIZE}px) {
