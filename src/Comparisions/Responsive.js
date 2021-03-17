@@ -1,9 +1,8 @@
-import react from 'react'
 import { Info, Result, Title } from './Styles'
 import Code from '../CodePrinter'
 import { Col, Row } from "antd";
-import { Item, FixItem, MaxItem, MinItem } from '../Item'
-import Grid, { FlexSection } from '../Layout';
+import { Item, FixItem, MinMaxItem } from '../Item'
+import { FlexSection, Grid } from '../Layout';
 
 const ant = {
   code: <FlexSection direction="column" gutter={24}>
@@ -12,6 +11,20 @@ const ant = {
       <Col md={24} lg={12} xl={6}><Item>Item</Item></Col>
       <Col md={24} lg={12} xl={6}><Item>Item</Item></Col>
       <Col md={24} lg={12} xl={6}><Item>Item</Item></Col>
+    </Row>
+    <Row gutter={[16, 16]} justify="space-between">
+      <Col><FixItem>Item 150px</FixItem></Col>
+      <Col><FixItem>Item 150px</FixItem></Col>
+      <Col><FixItem>Item 150px</FixItem></Col>
+      <Col><FixItem>Item 150px</FixItem></Col>
+      <Col><FixItem>Item 150px</FixItem></Col>
+    </Row>
+    <Row gutter={[16, 16]} justify="space-between">
+      <Col flex={1}><MinMaxItem>Item 200px - 300px</MinMaxItem></Col>
+      <Col flex={1}><MinMaxItem>Item 200px - 300px</MinMaxItem></Col>
+      <Col flex={1}><MinMaxItem>Item 200px - 300px</MinMaxItem></Col>
+      <Col flex={1}><MinMaxItem>Item 200px - 300px</MinMaxItem></Col>
+      <Col flex={1}><MinMaxItem>Item 200px - 300px</MinMaxItem></Col>
     </Row>
   </FlexSection>,
   fragment: [{
@@ -43,11 +56,19 @@ const grid= {
       <Item>Item</Item>
       <Item>Item</Item>
     </Grid>
-    <Grid>
-      <FixItem>Item</FixItem>
-      <FixItem>Item</FixItem>
-      <FixItem>Item</FixItem>
-      <FixItem>Item</FixItem>
+    <Grid minWidth={150} justify="center">
+      <FixItem>Item 150</FixItem>
+      <FixItem>Item 150</FixItem>
+      <FixItem>Item 150</FixItem>
+      <FixItem>Item 150</FixItem>
+      <FixItem>Item 150</FixItem>
+    </Grid>
+    <Grid minWidth={200} justify="center">
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
+      <MinMaxItem>Item 200px - 300px</MinMaxItem>
     </Grid>
   </FlexSection>,
   fragment: [{

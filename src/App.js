@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const Section = styled.div`
   min-height: 100vh;
-  min-width: 992px;
+  //min-width: 992px;
   padding: 20px;
   background-color: black;
   color: white;
@@ -21,10 +21,10 @@ function App() {
   return (
     <Section>
       <FlexSection direction='column' gutter={16}>
-        <img style={{margin: 'auto'}} src={process.env.PUBLIC_URL + '/test.gif'}/>
+        <img style={{margin: 'auto'}} src={process.env.PUBLIC_URL + '/test.gif'} alt="F for the img"/>
         <Basic />
         <Spandability />
-        {/*<Responsive />*/}
+        <Responsive />
         {/**
          * responsive
          *    both: could support different layouts
@@ -33,6 +33,8 @@ function App() {
          * flex
          *    grid con: you need a different Grid template on each example
          *    ant pro: could receive flex props
+         *
+         * Mediaquery vs grid
          */}
       </FlexSection>
     </Section>

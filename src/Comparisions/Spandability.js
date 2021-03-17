@@ -1,9 +1,15 @@
-import react from 'react'
 import { Info, Result, Title } from './Styles'
 import Code from '../CodePrinter'
-import { Col, Row } from "antd";
+import { Col, Row as AntRow } from "antd";
 import { Item } from '../Item'
-import Grid, { FlexSection } from '../Layout';
+import { FlexSection, Grid } from '../Layout';
+import styled from 'styled-components'
+
+const Row = styled(AntRow)`
+  .ant-col {
+    background-color: #00ff00;
+  }
+`
 
 const ant = {
   code: <FlexSection direction="column" gutter={24}>
@@ -19,6 +25,11 @@ const ant = {
     </Row>
   </FlexSection>,
   fragment: [{
+    type: 'css',
+    code: `
+.ant-col {
+  background-color: #00ff00;
+}`},{
     type: 'html',
     code:`
 <Row gutter={[16, 16]}>

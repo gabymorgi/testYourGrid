@@ -1,9 +1,8 @@
-import react from 'react'
 import { Info, Result, Title } from './Styles'
 import Code from '../CodePrinter'
 import { Col, Row as AntRow } from "antd";
 import { Item } from '../Item'
-import Grid, { FlexSection } from '../Layout';
+import { FlexSection, Grid } from '../Layout';
 import styled from 'styled-components'
 
 const Row = styled(AntRow)`
@@ -31,12 +30,12 @@ const ant = {
       <Col span={6}><Item>Item</Item></Col>
     </Row>
     <Row gutter={4}>
-      <Col span={5}><Item>Item</Item></Col>
-      <Col span={5}><Item>Item</Item></Col>
-      <Col span={5}><Item>Item</Item></Col>
-      <Col span={5}><Item>Item</Item></Col>
-      <Col span={5}><Item>Item</Item></Col>
-      <Col span={5}><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
+      <Col flex="0 1 20%"><Item>Item</Item></Col>
     </Row>
   </FlexSection>,
   fragment: [{
@@ -64,12 +63,12 @@ const ant = {
   <Col span={6}><Item>Item</Item></Col>
 </Row>
 <Row gutter={4}>
-  <Col span={5}><Item>Item</Item></Col>
-  <Col span={5}><Item>Item</Item></Col>
-  <Col span={5}><Item>Item</Item></Col>
-  <Col span={5}><Item>Item</Item></Col>
-  <Col span={5}><Item>Item</Item></Col>
-  <Col span={5}><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
+  <Col flex="0 1 20%"><Item>Item</Item></Col>
 </Row>`
   }]
 }
@@ -149,9 +148,10 @@ const Basic = () => {
       </div>
       <div>
         <Info pro>Supported by any browser</Info>
-        <Info con>Is limited by the 24 column system</Info>
+        <Info warning>Is limited by the 24 column system</Info>
+        <Info pro style={{ paddingLeft: '2em' }}>It could be fixed by flex param</Info>
         <Info con>Needs a Col wrapper on each item to works</Info>
-        <Info con>Each col must have span prop to fill the space</Info>
+        <Info con>Each col must have a prop to fill the space</Info>
         <Info con>Use weird tricks like negative margins</Info>
       </div>
       <Code codeFragments={grid.fragment} />

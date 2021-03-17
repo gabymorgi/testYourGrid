@@ -157,6 +157,7 @@ const CodePrinter = (props) => {
       switch (fragment.type) {
         case 'css': return <CssCode code={fragment.code}/>
         case 'html': return <HtmlCode code={fragment.code}/>
+        default: return null
       }
     })}
   </StyledCode>

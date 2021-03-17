@@ -41,8 +41,15 @@ const StItem = styled.div`
 
 const StItemW = styled(StItem)`
   ${props => props.width && `width: ${props.width}px;`}
-  ${props => props.minwidth && `min-width: ${props.width}px;`}
-  ${props => props.maxwidth && `max-width: ${props.width}px;`}
+  ${props => props.minwidth && `min-width: ${props.minwidth}px;`}
+  ${props => props.maxwidth && `max-width: ${props.maxwidth}px;`}
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: unset;
+  text-overflow: unset;
+  overflow: unset;
 `
 
 export const Item = (props) => {
@@ -51,14 +58,8 @@ export const Item = (props) => {
   </StItem>
 }
 
-export const MinItem = (props) => {
-  return <StItemW {...props} minwidth={150} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
-    {props.children}
-  </StItemW>
-}
-
-export const MaxItem = (props) => {
-  return <StItemW {...props} maxwidth={150} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
+export const MinMaxItem = (props) => {
+  return <StItemW {...props} maxwidth={300} minwidth={200} bgcolor={beautyColors[parseInt(Math.random() * beautyColors.length)]}>
     {props.children}
   </StItemW>
 }

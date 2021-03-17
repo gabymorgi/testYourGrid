@@ -18,7 +18,8 @@ const Cell = styled.div`
 
 const StyledGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  ${(props) => props.width && `grid-template-columns: repeat(auto-fill, ${props.width}px);`}
+  ${(props) => props.minWidth && `grid-template-columns: repeat(auto-fill, minmax(${props.minWidth}px, 1fr));`}
   ${props => (props.columns || props.xs) && `grid-template-columns: repeat(${props.columns || props.xs || 1}, 1fr);`}
   ${props => props.sm &&
     `@media (min-width: ${res.MIN_SM_SIZE}px) {
@@ -48,9 +49,10 @@ const StyledGrid = styled.div`
   ${(props) =>
     props.gutter
       ? Array.isArray(props.gutter)
-        ? `grid-gap: ${props.gutter[0]}px ${props.gutter[1]}px;`
+        ? `grid-gap: ${props.gutter[1]}px ${props.gutter[0]}px;`
         : `grid-gap: ${props.gutter}px;`
       : undefined}
+  ${(props) => props.justify && `justify-items: ${props.justify}`}
 `
 
 /**
@@ -69,7 +71,7 @@ const StyledGrid = styled.div`
  * ║ columns={5}    ║ -Not available- ║
  * ╚════════════════╩═════════════════╝
  */
-const Grid = (props) => {
+export const Grid = (props) => {
   if (props.loading) {
     return (
       <div className="flex justify-center">
@@ -92,5 +94,3 @@ export const FlexSection = styled.div`
       : `margin-right: ${props.gutter}px;`}
   } 
 `
-
-export default Grid
